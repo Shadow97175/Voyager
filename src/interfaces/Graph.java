@@ -1,30 +1,27 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package interfaces;
 
 import java.util.Map;
 import java.util.Set;
 
 public interface Graph {
+    Set<Graph.Vertex> getVertices();
 
-    interface Vertex {
-        // Получение имени вершины
-        String getName();
+    default Set<Graph.Vertex> getNeighbors(Graph.Vertex v) {
+        return this.getConnections(v).keySet();
     }
 
-    interface Edge {
-        // Получение веса (длины) дуги
+    Map<Graph.Vertex, Graph.Edge> getConnections(Graph.Vertex var1);
+
+    public interface Edge {
         int getWeight();
     }
 
-    // Получение множества всех вершин
-    Set<Vertex> getVertices();
-
-    // Получение множества вершин, соседних с данной
-    default Set<Vertex> getNeighbors(Vertex v) {
-        return getConnections(v).keySet();
+    public interface Vertex {
+        String getName();
     }
-
-    // Получение по заданной вершине ассоциативного массива,
-    // ключом которого я    вляются соседние вершины,
-    // а значением -- ведущие в данные вершины дуги
-    Map<Vertex, Edge> getConnections(Vertex v);
 }

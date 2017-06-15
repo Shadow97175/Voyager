@@ -1,16 +1,27 @@
 package classes;
 
-import interfaces.Graph;
+import interfaces.Graph.Vertex;
 
-public class City implements Graph.Vertex {
-    String cityName;
-    //Конструктор для города
-    City(String cityName) {
+public class City implements Vertex {
+    private String cityName;
+
+    public City(String cityName) {
         this.cityName = cityName;
     }
 
-    @Override
     public String getName() {
-        return cityName;
+        return this.cityName;
+    }
+
+    public String toString() {
+        return this.cityName;
+    }
+
+    protected Object clone() {
+        return new City(this.cityName);
+    }
+
+    public boolean equals(Object obj) {
+        return obj instanceof City?((City)obj).cityName.equals(this.cityName):false;
     }
 }
