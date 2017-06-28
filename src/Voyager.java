@@ -1,18 +1,22 @@
 import classes.City;
-import classes.Iskatel;
 import classes.Towns;
-import interfaces.Graph.Vertex;
+import interfaces.Graph;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Set;
 
-public class Voyager {
-    public Voyager() {
-    }
+import static classes.Iskatel.findShortestLoop;
 
-    public static void main(String[] args) {
+
+public class Voyager {
+
+    public static void main(String args[]) {
         System.out.println("Start of the Voyager program");
+
+        //Создаю экземпляр класса города, в котором будут храниться данные о городах и расстояних между ними
         Towns towns = new Towns();
+
+        //создаю города, к которым буду прокладывать дороги
         City a = new City("A");
         City b = new City("B");
         City c = new City("C");
@@ -20,6 +24,8 @@ public class Voyager {
         City e = new City("E");
         City f = new City("F");
         City g = new City("G");
+
+        //Добавляю данные, а именно все города
         towns.addTown(a);
         towns.addTown(b);
         towns.addTown(c);
@@ -27,6 +33,9 @@ public class Voyager {
         towns.addTown(e);
         towns.addTown(f);
         towns.addTown(g);
+
+
+        //Добавляю данные, а именно все дороги
         towns.addRoad(a, b, 100);
         towns.addRoad(b, d, 60);
         towns.addRoad(b, f, 150);
@@ -37,23 +46,24 @@ public class Voyager {
         towns.addRoad(g, e, 100);
         towns.addRoad(c, e, 100);
         towns.addRoad(c, a, 100);
-        Set testCities = towns.getVertices();
-        System.out.println("Введенные города:");
-        Iterator path = testCities.iterator();
 
-        while(path.hasNext()) {
-            Vertex vertex = (Vertex)path.next();
+
+        //Проверяю как работает метод получения всех городов, вывожу список
+        Set<Graph.Vertex> testCities = towns.getVertices();
+        System.out.println("Введенные города:");
+        for (Graph.Vertex vertex : testCities) {
             System.out.println(vertex.getName());
         }
 
-        new ArrayList();
-        ArrayList path1 = Iskatel.findShortestLoop(towns);
-        towns.getLength(a, b);
-        System.out.print("Path: ");
-        Iterator vertex1 = path1.iterator();
+        //Класс way будет содержать кратчайший путь
+        ArrayList<Graph.Vertex> path = new ArrayList<>();
 
-        while(vertex1.hasNext()) {
-            Vertex current = (Vertex)vertex1.next();
+        path = findShortestLoop(towns);
+
+        towns.getLength(a, b);
+        // Выводим кратчайший путь
+        System.out.print("Path: ");
+        for (Graph.Vertex current : path) {
             System.out.print("" + current.getName());
         }
 

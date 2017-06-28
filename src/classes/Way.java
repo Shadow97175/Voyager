@@ -1,6 +1,9 @@
 package classes;
 
+
+import interfaces.Graph;
 import interfaces.Graph.Vertex;
+
 import java.util.ArrayList;
 
 public class Way {
@@ -8,21 +11,21 @@ public class Way {
     int length;
 
     public Way() {
-        this.path = new ArrayList();
+        path = new ArrayList<>();
     }
 
     public Way(int length) {
         this.length = length;
-        this.path = new ArrayList();
+        path = new ArrayList<>();
     }
 
     public Way(ArrayList<Vertex> cities, int length) {
         this.length = length;
-        this.path = cities;
+        path = cities;
     }
 
     public ArrayList<Vertex> getPath() {
-        return this.path;
+        return path;
     }
 
     public void setPath(ArrayList<Vertex> path) {
@@ -30,7 +33,7 @@ public class Way {
     }
 
     public int getLength() {
-        return this.length;
+        return length;
     }
 
     public void setLength(int length) {
@@ -38,14 +41,15 @@ public class Way {
     }
 
     public void addLength(int distance) {
-        this.length += distance;
+        length += distance;
     }
 
     public void removeLength(int distance) {
-        this.length -= distance;
+        length -= distance;
     }
 
+    @Override
     protected Object clone() {
-        return new Way(new ArrayList(this.path), this.length);
+        return new Way(new ArrayList<>(path), length);
     }
 }
