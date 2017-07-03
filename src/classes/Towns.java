@@ -4,8 +4,6 @@ import interfaces.Graph;
 
 import java.util.*;
 
-import static classes.Iskatel.NOT_FOUND;
-
 public class Towns implements Graph {
 
     Set<City> cities = new HashSet<>();
@@ -25,13 +23,7 @@ public class Towns implements Graph {
     }
 
     public int getLength(Vertex a, Vertex b) {
-        System.out.println("Near " + a.getName() + " near " + b.getName());
-        Edge road = getConnections(a).get(b);
-
-        if (road != null)
-            return road.getWeight();
-        else
-            return NOT_FOUND;
+        return getConnections(a).get(b).getWeight();
     }
 
     //Возвращает все города

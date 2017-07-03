@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class Iskatel {
-    private static final boolean FULL_DEBUG = true;
-
-    public static final int NOT_FOUND = -3;
+    private static final boolean FULL_DEBUG = false;
 
     private static Way currentOptimalWay = new Way(Integer.MAX_VALUE);
 
@@ -49,13 +47,14 @@ public class Iskatel {
                     if (FULL_DEBUG)
                         System.out.println("Removing from path " + neighbor.getName());
 
-                    if (alreadyWas.size() == t.getVertices().size() && t.getLength(neighbor, start) != NOT_FOUND) {
-                        System.out.println(way.getPath());
+                    if (alreadyWas.size() == t.getVertices().size()) {
                         way.addLength(t.getLength(neighbor, start));
-                        System.out.println("Found one way, length = " + way.getLength() + " " + alreadyWas.toString());
+                        if (FULL_DEBUG)
+                            System.out.println("Found one way, length = " + way.getLength() + " " + alreadyWas.toString());
 
                         if (currentOptimalWay.getLength() > way.getLength())
                             currentOptimalWay = (Way) way.clone();
+
                         way.removeLength(t.getLength(neighbor, start));
                     }
 
@@ -65,7 +64,8 @@ public class Iskatel {
             } else if (FULL_DEBUG)
                 System.out.println("Already was in " + neighbor.getName());
         }
-        System.out.println("Optimal way + " + currentOptimalWay.getPath().toString());
+        if (FULL_DEBUG)
+            System.out.println("Optimal way + " + currentOptimalWay.getPath().toString());
         return null;
     }
 

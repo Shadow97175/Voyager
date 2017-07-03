@@ -1,5 +1,7 @@
 package interfaces;
 
+
+
 import java.util.Map;
 import java.util.Set;
 
@@ -28,3 +30,4 @@ public interface Graph {
     // а значением -- ведущие в данные вершины дуги
     Map<Vertex, Edge> getConnections(Vertex v);
 }
+
